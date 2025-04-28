@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقييمات صقر اكسبريس | شركة الشحن السريع</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #e30613;
+            --secondary-color: #f8f8f8;
+            --text-color: #333;
+            --light-gray: #eee;
+            --dark-gray: #777;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .review {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .review:last-child {
+            border-bottom: none;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .review-user {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background-color: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            color: var(--dark-gray);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .user-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .user-info .date {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+        
+        .review-rating {
+            color: #ffc107;
+            font-size: 1.2rem;
+        }
+        
+        .review-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+        
+        .review-content p {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .add-review {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .add-review h2 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .star-rating {
+            direction: ltr;
+        }
+        
+        .star-rating input {
+            display: none;
+        }
+        
+        .star-rating label {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        
+        .star-rating input:checked ~ label {
+            color: #ddd;
+        }
+        
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input:checked + label,
+        .star-rating input:checked ~ label {
+            color: #ffc107;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        button:hover {
+            background-color: #c00510;
+        }
+        
+        @media (max-width: 768px) {
+            .review-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .review-rating {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>تقييمات شركة صقر اكسبريس</h1>
+            <p>شاركنا تجربتك مع شركة الشحن السريع</p>
+        </header>
+        
+        <div id="reviews-list">
+            <!-- التقيمات ستظهر هنا -->
+        </div>
+        
+        <div class="add-review">
+            <h2>أضف تقييمك</h2>
+            <form id="review-form">
+                <div class="form-group">
+                    <label for="name">الاسم</label>
+                    <input type="text" id="name" placeholder="اسمك (اختياري)">
+                </div>
+                
+                <div class="form-group">
+                    <label for="rating">التقييم</label>
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1"><i class="fas fa-star"></i></label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="title">عنوان التقييم</label>
+                    <input type="text" id="title" required placeholder="اكتب عنوانًا مختصرًا للتقييم">
+                </div>
+                
+                <div class="form-group">
+                    <label for="review">التفاصيل</label>
+                    <textarea id="review" required placeholder="شاركنا تجربتك مع صقر اكسبريس"></textarea>
+                </div>
+                
+                <button type="submit">إرسال التقييم</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // بيانات التقييمات الوهمية
+        const dummyReviews = [
+            {
+                name: "أحمد محمد",
+                rating: 5,
+                title: "خدمة ممتازة وسريعة",
+                review: "استخدمت خدمات صقر اكسبريس عدة مرات وكانت تجربة رائعة دائمًا. الشحن سريع والموظفون محترفون. أوصي بهم بشدة.",
+                date: "2023-05-15"
+            },
+            {
+                name: "سارة عبدالله",
+                rating: 5,
+                title: "أفضل شركة شحن في المنطقة",
+                review: "التزام بالمواعيد، تعامل راقي، أسعار معقولة. ما أكثر تطلب من شركة شحن؟ شكرًا صقر اكسبريس.",
+                date: "2023-05-10"
+            },
+            {
+                name: "خالد علي",
+                rating: 4,
+                title: "جيدة ولكن يمكن التحسين",
+                review: "الخدمة بشكل عام جيدة ولكن تأخرت الشحنة يومين عن الموعد المحدد. مع ذلك التعامل كان جيدًا وحلوا المشكلة بسرعة.",
+                date: "2023-05-08"
+            },
+            {
+                name: "نورة سعد",
+                rating: 5,
+                title: "سرعة ودقة في التنفيذ",
+                review: "طلبت شحنة مستعجلة وكانت عندي في نفس اليوم! إنجاز رائع وشكرًا للموظفين على احترافيتهم.",
+                date: "2023-05-05"
+            },
+            {
+                name: "فهد راشد",
+                rating: 5,
+                title: "ممتازة بكل المقاييس",
+                review: "تعاملت مع عدة شركات شحن ولكن صقر اكسبريس هي الأفضل من حيث السرعة والأمان والاحترافية. أوصي بهم.",
+                date: "2023-05-01"
+            }
+        ];
+
+        // دالة لعرض التقييمات
+        function displayReviews(reviews) {
+            const reviewsList = document.getElementById('reviews-list');
+            reviewsList.innerHTML = '';
+            
+            reviews.forEach(review => {
+                const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                const reviewDate = new Date(review.date).toLocaleDateString('ar-EG');
+                const userInitial = review.name ? review.name.split(' ')[0].charAt(0) : 'م';
+                
+                const reviewElement = document.createElement('div');
+                reviewElement.className = 'review';
+                reviewElement.innerHTML = `
+                    <div class="review-header">
+                        <div class="review-user">
+                            <div class="user-avatar">${userInitial}</div>
+                            <div class="user-info">
+                                <h4>${review.name || 'عميل'}</h4>
+                                <div class="date">${reviewDate}</div>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            ${stars}
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <h3>${review.title}</h3>
+                        <p>${review.review}</p>
+                    </div>
+                `;
+                
+                reviewsList.appendChild(reviewElement);
+            });
+        }
+
+        // دالة لإضافة تقييم جديد
+        function addReview(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value || 'عميل';
+            const rating = document.querySelector('input[name="rating"]:checked');
+            
+            if (!rating) {
+                alert('الرجاء اختيار تقييم من 1 إلى 5 نجوم');
+                return;
+            }
+            
+            const title = document.getElementById('title').value;
+            const reviewText = document.getElementById('review').value;
+            const date = new Date().toISOString().split('T')[0];
+            
+            const newReview = {
+                name,
+                rating: parseInt(rating.value),
+                title,
+                review: reviewText,
+                date
+            };
+            
+            dummyReviews.unshift(newReview);
+            displayReviews(dummyReviews);
+            
+            document.getElementById('review-form').reset();
+            alert('شكرًا لك! تم إضافة تقييمك بنجاح.');
+        }
+
+        // تهيئة الصفحة عند التحميل
+        document.addEventListener('DOMContentLoaded', () => {
+            displayReviews(dummyReviews);
+            document.getElementById('review-form').addEventListener('submit', addReview);
+        });
+    </script>
+</body>
+</html>
